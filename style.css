@@ -1,0 +1,94 @@
+#map {
+    /* position: sticky; */
+    width: 80%;
+    height: 40em;
+    margin: auto;
+    border: 3px solid green;
+}
+
+/* Optional: Makes the sample page fill the window. */
+/* html, body {
+    height: 100%;
+    align-self: center;
+    margin: 0;
+    padding: 0;
+    padding-left: 45px;
+} */
+
+#unordered-list {
+/*    margin-left: 2em;*/
+    /* padding-top: 10px; */
+    margin: auto;
+    /* width: 80%; */
+    padding-left: auto;
+    padding-right: 127px;
+
+/*     -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2; */
+}
+
+#floating-panel {
+    /* border: 3px solid green; */
+    margin-bottom: 10px;
+    /* align-self: right; */
+    /* border: 3px solid green; */
+}
+
+#page-title {
+
+}
+
+#returned-address {
+    /* border: solid; */
+    height: 4em;
+    margin: auto;
+    margin-bottom: 2px;
+}
+
+
+.col-centered{
+    float: none;
+    margin: auto;
+}
+
+
+#walking-key {
+    visibility: hidden;
+}
+
+
+#padding {
+    padding-top: 0.5em;
+    margin: auto;
+}
+
+#padding2 {
+    padding-top: 0.5em;
+    margin: auto;
+}
+
+#walking-Circle {
+    padding-top: 500em;
+}
+
+
+#one-hundred-fifty-metres {
+    color: white;
+    background: green;
+}
+
+#three-hundred-metres {
+    color: white;
+    background: blue;
+}
+
+#six-hundred-metres {
+    color: white;
+    background: purple;
+}
+
+#search-limit {
+    color: white;
+    background: black;
+}
