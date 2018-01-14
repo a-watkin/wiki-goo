@@ -4,6 +4,8 @@ Wiki-goo is a mash up of the wikipedia and google maps APIs. Given an address it
 
 [Bootsrap](https://getbootstrap.com/) has been used for basic styling and [Bootstrap Toggle](http://www.bootstraptoggle.com/) toggle for sliding buttons.
 
+![Example usage](https://raw.githubusercontent.com/a-watkin/wiki-goo/master/wiki-goo-example.png)
+
 Javascript and jQuery is used to join the APIs together.
 
 # Usage and features
@@ -17,5 +19,3 @@ A distance from the chosen search location can also be overlaid on the map, this
 Click search, toggling click search allows for clicking on any part of the map and setting that as the new location. Information about that location can then be found even if the address is not known. The local area can be explored in this way.
 
 [You can see a live version of the project here](http://aws-website-wikki-goo-kgi2q.s3-website-us-east-1.amazonaws.com/)
-
-![Example usage](https://raw.githubusercontent.com/a-watkin/wiki-goo/master/wiki-goo-example.png)
