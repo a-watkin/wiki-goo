@@ -1,6 +1,6 @@
 # Wiki-goo
 
-Wiki-goo is a mash up of the wikipdia and google maps APIs. Given an address it returns a marker for that address and wikipedia articles related to that area so you can discover interesting things connected to that area.
+Wiki-goo is a mash up of the wikipedia and google maps APIs. Given an address it returns a marker for that address and wikipedia articles related to that area so you can discover interesting things connected to that area.
 
 [Bootsrap](https://getbootstrap.com/) has been used for basic styling and [Bootstrap Toggle](http://www.bootstraptoggle.com/) toggle for sliding buttons.
 
