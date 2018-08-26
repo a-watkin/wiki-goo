@@ -1,0 +1,33 @@
+average walking speed is about 5km/h
+
+average walking speed in m/s:
+about 1.38 m/s
+
+5 minutes in seconds:
+5 x 60 seconds = 300 seconds
+
+so the average person should be able to cover:
+1.38 x 300 = 414 metres
+
+
+walking speed x time = distance
+
+walking speed = distance / time
+
+distance / walking speed = time
+
+100m / 1.38 m/s = 72.463768115942028985507246376812
+just over a minute?
+
+
+two and a half minutes is 150 seconds
+120 + 30 = 150
+
+1.38 m/s x 150 s = 207 metres
+
+
+so there are no straight lines, so i'm thinking:
+2 minutes is 100 metres
+2.5 minutes should be 150 metres
+5 minutes should be 300 metres
+10 minutes should be 600 metres
