@@ -87,7 +87,6 @@ $(function() {
     // console.log('You toggled click search', clickSearch)
     // Remove distance markers
     toggleOff();
-    toggleDisable();
 
     if (clickSearch === true) {
       clickSearch = false;
@@ -148,25 +147,6 @@ function geocodeAddress(geocoder, resultsMap, clickAddress) {
   // geocache lookup happens here
   geocoder.geocode({'address': address}, function(results, status) {
   if (status === 'OK') {
-      // console out for lat lng
-      console.log(results, status, results[0].geometry.location.lat(), results[0].geometry.location.lng())
-      console.log(results.length)
-
-      console.log(results[0].formatted_address)
-      if ( results.length > 1 ) {
-        // console.log('Post code found: ', results[0]['address_components'][6].long_name)
-        let lastValue = results[0]['address_components'].length - 1;
-        console.log('test', results[0]['address_components'][lastValue].long_name);
-      } else {
-        console.log('not today ')
-      }
-
-      // console.log(results[0]['address_components'][6].long_name)
-
-      // if (results[0]['address_components'][6].long_name !== 'undifined') {
-      //   console.log('Post code found: ', results[0]['address_components'][6].long_name)
-      // }
-
       // sets url to the search result
       url = {lat: results[0].geometry.location.lat(),
              lng: results[0].geometry.location.lng()}
