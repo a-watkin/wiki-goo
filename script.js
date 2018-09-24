@@ -8,6 +8,7 @@ var numberOfResults = 20;
 var searchRadius = 1000;
 var disaplyMarkers = true;
 var address;
+
 var clickSearch = true;
 var geocoder;
 
@@ -82,7 +83,7 @@ function initMap() {
 // Click to search
 $(function() {
   $('#click-search').change(function() {
-
+    console.log('You toggled click search', clickSearch)
     // Remove distance markers
     toggleOff();
     toggleDisable();
@@ -115,28 +116,35 @@ $('#walking-Circle').change(function() {
 });
 
 function geocodeAddress(geocoder, resultsMap, clickAddress) {
-  // remove previous markers if any
+  // Remove previous markers if any
   deleteMarkers();
   $('#markers').bootstrapToggle('enable');
   toggleEnable();
-  // this is causing a PROBLEM, ok it was just messing up the switch
-  // because you forgot to set the boolean
+  // Set marker button status.
   $('#markers').bootstrapToggle('on');
   disaplyMarkers = true;
-
+  // removes walking distance info
   toggleOff();
 
-  // gets the value in the input box
+
+
+  // Gets address and passes it to geocache
+  // It's a bit confusing that it starts at true
   if (clickSearch === true) {
+    // gets the entered address
     address = document.getElementById('address').value;
   }
+  // If not using address data, use lat and lng from click.
   else {
     var tempString = String(clickAddress.lat() + ", " + clickAddress.lng());
+    // Logs the lat and lng of the click.
     // console.log("the stringified thingie is " + tempString);
     address = tempString;
   }
 
-  // actual geocode lookup here
+
+
+  // Geocode lookup happens here
   geocoder.geocode({'address': address}, function(results, status) {
   if (status === 'OK') {
       // sets url to the search result
@@ -144,6 +152,8 @@ function geocodeAddress(geocoder, resultsMap, clickAddress) {
              lng: results[0].geometry.location.lng()}
 
       fullAddress = results[0].formatted_address;
+
+      // update the displayed address
       document.getElementById("returned-address").innerHTML = addressBlurb + fullAddress;
 
       addMarker(url, true, true);
@@ -195,8 +205,8 @@ function addMarker(location, labelName, addInfoWindow, markerList) {
       infowindow.open(map, marker);
     });
 
-    // closes the window after 5 seconds
-    setTimeout(function () { infowindow.close(); }, 5000);
+    // closes the window after 3 seconds
+    setTimeout(function () { infowindow.close(); }, 3000);
   }
   else {
     contentString = markerList;
@@ -234,6 +244,7 @@ function centreMap() {
   }
 }
 
+// Wikipedia API call
 function getWikiValues() {
   var apiUrl = "https://en.wikipedia.org/w/api.php"
 
@@ -317,7 +328,7 @@ function deleteMarkers() {
   boundsArray = [];
 }
 
-// hard coded walking distances
+// hard coded walking distance values
 function walkingCircle() {
   addCircle(150, "green");
   addCircle(300, "blue");
