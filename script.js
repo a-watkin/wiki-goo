@@ -15,16 +15,18 @@ var geocoder;
 // helper methods for the toggle button used for walking
 // distances
 function toggleOff() {
-  $('#walking-Circle').bootstrapToggle('off')  
+  $('#walking-Circle').bootstrapToggle('off')
 }
-
+// makes walking distance visible, only wroks once a search has been done
 function toggleEnable() {
   $('#walking-Circle').bootstrapToggle('enable');
 }
 
+// disables walking distance button start
 function toggleDisable() {
   $('#walking-Circle').bootstrapToggle('disable');
 }
+
 
 $(document).ready(function(){
   // initialise the toggle buttons
@@ -35,13 +37,14 @@ $(document).ready(function(){
   $('#click-search').bootstrapToggle('off');
 
   $("#address").keyup(function(event){
-    // alert("hello");
+
     if(event.key === 'Enter'){
         $("#submit").click();
     }
   });
 });
 
+// Removes any map markers
 $(function() {
   $('#markers').change(function() {
     if (disaplyMarkers === true) {
@@ -55,7 +58,9 @@ $(function() {
   });
 });
 
+// Initialise the google map
 function initMap() {
+  // Start location
   var startUrl = {lat: 59.436962, lng: 24.753574}
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
@@ -64,8 +69,9 @@ function initMap() {
   });
 
   geocoder = new google.maps.Geocoder();
+  console.log(geocoder)
 
-  // geocoder service
+  // Initialise the map and the blurb about the address.
   document.getElementById('submit').addEventListener('click', function() {
     document.getElementById("returned-address").style.color = "black";
     document.getElementById("returned-address").innerHTML = addressBlurb;
@@ -73,15 +79,15 @@ function initMap() {
   });
 }
 
-// experiment click for search
+// Click to search
 $(function() {
   $('#click-search').change(function() {
 
+    // Remove distance markers
     toggleOff();
-    // toggleDisable();
+    toggleDisable();
 
     if (clickSearch === true) {
-      // alert('testicles on');
       clickSearch = false;
      map.addListener('click', function(event) {
         geocodeAddress(geocoder, map, event.latLng);
@@ -90,8 +96,7 @@ $(function() {
     }
     else {
       clickSearch = true;
-      // so the problem was you didn't unregister the click event listener
-      // awesome
+      // The event listner here must be cleared to avoid problems.
       google.maps.event.clearListeners(map, 'click');
     }
   });
@@ -106,7 +111,7 @@ $('#walking-Circle').change(function() {
     else {
       deleteCircle();
     }
-  })
+  });
 });
 
 function geocodeAddress(geocoder, resultsMap, clickAddress) {
