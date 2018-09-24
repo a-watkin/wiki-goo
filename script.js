@@ -36,7 +36,7 @@ $(document).ready(function(){
 
   $("#address").keyup(function(event){
     // alert("hello");
-    if(event.keyCode == 13){
+    if(event.key === 'Enter'){
         $("#submit").click();
     }
   });
@@ -56,7 +56,7 @@ $(function() {
 });
 
 function initMap() {
-  var startUrl = {lat: 52.52000659999999, lng: 13.404953999999975}
+  var startUrl = {lat: 59.436962, lng: 24.753574}
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: startUrl,
@@ -248,6 +248,7 @@ function getWikiValues() {
       document.getElementById("wiki-list").innerHTML = "";
 
       var bounds = new google.maps.LatLngBounds();
+      console.log(bounds)
 
       if (response.query.geosearch.length === 0) {
         document.getElementById("result-header").innerHTML = 
