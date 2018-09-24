@@ -61,8 +61,9 @@ $(function() {
 
 // Initialise the google map
 function initMap() {
-  // Start location
-  var startUrl = {lat: 59.436962, lng: 24.753574}
+  // Start location, here it is the centre of Tallinn
+  // 59.43696079999999 24.753574699999945
+  var startUrl = {lat: 59.43696079999999, lng: 24.753574699999945}
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: startUrl,
@@ -70,7 +71,7 @@ function initMap() {
   });
 
   geocoder = new google.maps.Geocoder();
-  console.log(geocoder)
+  // console.log(geocoder)
 
   // Initialise the map and the blurb about the address.
   document.getElementById('submit').addEventListener('click', function() {
@@ -83,7 +84,7 @@ function initMap() {
 // Click to search
 $(function() {
   $('#click-search').change(function() {
-    console.log('You toggled click search', clickSearch)
+    // console.log('You toggled click search', clickSearch)
     // Remove distance markers
     toggleOff();
     toggleDisable();
@@ -144,14 +145,35 @@ function geocodeAddress(geocoder, resultsMap, clickAddress) {
 
 
 
-  // Geocode lookup happens here
+  // geocache lookup happens here
   geocoder.geocode({'address': address}, function(results, status) {
   if (status === 'OK') {
+      // console out for lat lng
+      console.log(results, status, results[0].geometry.location.lat(), results[0].geometry.location.lng())
+      console.log(results.length)
+
+      console.log(results[0].formatted_address)
+      if ( results.length > 1 ) {
+        // console.log('Post code found: ', results[0]['address_components'][6].long_name)
+        let lastValue = results[0]['address_components'].length - 1;
+        console.log('test', results[0]['address_components'][lastValue].long_name);
+      } else {
+        console.log('not today ')
+      }
+
+      // console.log(results[0]['address_components'][6].long_name)
+
+      // if (results[0]['address_components'][6].long_name !== 'undifined') {
+      //   console.log('Post code found: ', results[0]['address_components'][6].long_name)
+      // }
+
       // sets url to the search result
       url = {lat: results[0].geometry.location.lat(),
              lng: results[0].geometry.location.lng()}
 
       fullAddress = results[0].formatted_address;
+      // full address returned
+      // console.log(results[0].formatted_address)
 
       // update the displayed address
       document.getElementById("returned-address").innerHTML = addressBlurb + fullAddress;
@@ -264,7 +286,7 @@ function getWikiValues() {
       document.getElementById("wiki-list").innerHTML = "";
 
       var bounds = new google.maps.LatLngBounds();
-      console.log(bounds)
+      // console.log(bounds)
 
       if (response.query.geosearch.length === 0) {
         document.getElementById("result-header").innerHTML = 
