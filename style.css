@@ -1,9 +1,16 @@
+/* this mostly doesn't work for some reason? */
+body {
+    /* background: #3333; */
+}
+
+
 #map {
     /* position: sticky; */
     width: 80%;
     height: 40em;
     margin: auto;
-    /*border: 3px solid green;*/
+    border-radius: 10px;
+    border: 3px solid white;
 }
 
 #unordered-list {
@@ -16,42 +23,25 @@
     margin-bottom: 10px;
 }
 
-#page-title {
-
-}
-
 #returned-address {
     height: 4em;
     margin: auto;
     margin-bottom: 2px;
 }
 
-
 .col-centered{
     float: none;
     margin: auto;
 }
 
-
+/* Walking distance elements */
 #walking-key {
     visibility: hidden;
-}
-
-
-#padding {
-    padding-top: 0.5em;
-    margin: auto;
-}
-
-#padding2 {
-    padding-top: 0.5em;
-    margin: auto;
 }
 
 #walking-Circle {
     padding-top: 500em;
 }
-
 
 #one-hundred-fifty-metres {
     color: white;
