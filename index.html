@@ -32,9 +32,10 @@
   </head>
 
   <body>
-  <!-- <div class="grid"> -->
+    <!-- bootstrap container -->
     <div class="container-fluid">
 
+      <!-- title and description -->
       <div class="row">
         <div class="col-sx-12 col-lg-10">
           <h1 class="text-center">Wiki-goo</h1>
@@ -43,6 +44,8 @@
             </p>
         </div>
       </div>
+
+      <!-- search input and centre button -->
       <div class="row">
         <!-- first column of this row -->
         <div id="floating-panel" class="col-xs-6 text-center">
@@ -53,17 +56,20 @@
             <input id="address" type="text" class="form-control" placeholder="" value="Tallinn">
           </div>
         </div>
-        <!-- third column of this row -->
+
+        <!-- centre button -->
         <div class="col-xs-6 text-center">
           <input onclick="centreMap();" class="btn btn-primary btn-block" type=button value="Centre map">
         </div>
-        <!-- second column of this row -->
+
+        <!-- walking distance -->
         <div class="col-xs-12 text-center">
           Markers <input checked data-toggle="toggle" type="checkbox" id="markers">
           Walking distance <input checked data-toggle="toggle" type="checkbox" id="walking-Circle">
           Click search <input checked data-toggle="toggle" type="checkbox" id="click-search">
         </div>
       </div>
+
       <!-- information area, the map address and key for the walking distance estimations -->
       <div class="row">
         <div class="col-xs-6 text-center" id="returned-address">
