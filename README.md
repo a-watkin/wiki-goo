@@ -8,7 +8,7 @@ Wiki-goo is a mash up of the wikipedia and google maps APIs. Given an address it
 
 Javascript and jQuery is used to join the APIs together.
 
-# Usage and features
+## Usage and features
 
 Map markers of the geographical location of wikipedia pages are displayed on the map. Clicking on them will open an information box with a link to the article.
 
