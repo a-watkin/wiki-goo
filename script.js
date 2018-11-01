@@ -2,7 +2,8 @@ var map;
 var url;
 var markers = [];
 var boundsArray = [];
-var addressBlurb = "The google goecache service has returned the address: " + "<br>";
+var addressBlurb =
+  "The google goecache service has returned the address: " + "<br>";
 var circles = [];
 var numberOfResults = 20;
 var searchRadius = 1000;
@@ -12,47 +13,43 @@ var address;
 var clickSearch = true;
 var geocoder;
 
-
 // helper methods for the toggle button used for walking
 // distances
 function toggleOff() {
-  $('#walking-Circle').bootstrapToggle('off')
+  $("#walking-Circle").bootstrapToggle("off");
 }
 // makes walking distance visible, only wroks once a search has been done
 function toggleEnable() {
-  $('#walking-Circle').bootstrapToggle('enable');
+  $("#walking-Circle").bootstrapToggle("enable");
 }
 
 // disables walking distance button start
 function toggleDisable() {
-  $('#walking-Circle').bootstrapToggle('disable');
+  $("#walking-Circle").bootstrapToggle("disable");
 }
 
-
-$(document).ready(function(){
+$(document).ready(function() {
   // initialise the toggle buttons
-  $('#markers').bootstrapToggle('on');
-  $('#walking-Circle').bootstrapToggle('off');
-  $('#markers').bootstrapToggle('disable');
-  $('#walking-Circle').bootstrapToggle('disable');
-  $('#click-search').bootstrapToggle('off');
+  $("#markers").bootstrapToggle("on");
+  $("#walking-Circle").bootstrapToggle("off");
+  $("#markers").bootstrapToggle("disable");
+  $("#walking-Circle").bootstrapToggle("disable");
+  $("#click-search").bootstrapToggle("off");
 
-  $("#address").keyup(function(event){
-
-    if(event.key === 'Enter'){
-        $("#submit").click();
+  $("#address").keyup(function(event) {
+    if (event.key === "Enter") {
+      $("#submit").click();
     }
   });
 });
 
 // Removes any map markers
 $(function() {
-  $('#markers').change(function() {
+  $("#markers").change(function() {
     if (disaplyMarkers === true) {
       clearMarkers();
       disaplyMarkers = false;
-    }
-    else {
+    } else {
       showMarkers();
       disaplyMarkers = true;
     }
@@ -63,8 +60,8 @@ $(function() {
 function initMap() {
   // Start location, here it is the centre of Tallinn
   // 59.43696079999999 24.753574699999945
-  var startUrl = {lat: 59.43696079999999, lng: 24.753574699999945}
-  map = new google.maps.Map(document.getElementById('map'), {
+  var startUrl = { lat: 59.43696079999999, lng: 24.753574699999945 };
+  map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
     center: startUrl,
     scaleControl: true
@@ -74,7 +71,7 @@ function initMap() {
   // console.log(geocoder)
 
   // Initialise the map and the blurb about the address.
-  document.getElementById('submit').addEventListener('click', function() {
+  document.getElementById("submit").addEventListener("click", function() {
     document.getElementById("returned-address").style.color = "black";
     document.getElementById("returned-address").innerHTML = addressBlurb;
     geocodeAddress(geocoder, map);
@@ -83,33 +80,31 @@ function initMap() {
 
 // Click to search
 $(function() {
-  $('#click-search').change(function() {
+  $("#click-search").change(function() {
     // console.log('You toggled click search', clickSearch)
     // Remove distance markers
     toggleOff();
 
     if (clickSearch === true) {
       clickSearch = false;
-     map.addListener('click', function(event) {
+      map.addListener("click", function(event) {
         geocodeAddress(geocoder, map, event.latLng);
-        $('#click-search').bootstrapToggle('off');
+        $("#click-search").bootstrapToggle("off");
       });
-    }
-    else {
+    } else {
       clickSearch = true;
       // The event listner here must be cleared to avoid problems.
-      google.maps.event.clearListeners(map, 'click');
+      google.maps.event.clearListeners(map, "click");
     }
   });
 });
 
 // toggle walking circles
 $(function() {
-$('#walking-Circle').change(function() {
-    if ($(this).prop('checked') === true) {
+  $("#walking-Circle").change(function() {
+    if ($(this).prop("checked") === true) {
       walkingCircle();
-    }
-    else {
+    } else {
       deleteCircle();
     }
   });
@@ -118,21 +113,19 @@ $('#walking-Circle').change(function() {
 function geocodeAddress(geocoder, resultsMap, clickAddress) {
   // Remove previous markers if any
   deleteMarkers();
-  $('#markers').bootstrapToggle('enable');
+  $("#markers").bootstrapToggle("enable");
   toggleEnable();
   // Set marker button status.
-  $('#markers').bootstrapToggle('on');
+  $("#markers").bootstrapToggle("on");
   disaplyMarkers = true;
   // removes walking distance info
   toggleOff();
-
-
 
   // Gets address and passes it to geocache
   // It's a bit confusing that it starts at true
   if (clickSearch === true) {
     // gets the entered address
-    address = document.getElementById('address').value;
+    address = document.getElementById("address").value;
   }
   // If not using address data, use lat and lng from click.
   else {
@@ -142,36 +135,36 @@ function geocodeAddress(geocoder, resultsMap, clickAddress) {
     address = tempString;
   }
 
-
-
   // geocache lookup happens here
-  geocoder.geocode({'address': address}, function(results, status) {
-  if (status === 'OK') {
+  geocoder.geocode({ address: address }, function(results, status) {
+    if (status === "OK") {
       // sets url to the search result
-      url = {lat: results[0].geometry.location.lat(),
-             lng: results[0].geometry.location.lng()}
+      url = {
+        lat: results[0].geometry.location.lat(),
+        lng: results[0].geometry.location.lng()
+      };
 
       fullAddress = results[0].formatted_address;
       // full address returned
       // console.log(results[0].formatted_address)
 
       // update the displayed address
-      document.getElementById("returned-address").innerHTML = addressBlurb + fullAddress;
+      document.getElementById("returned-address").innerHTML =
+        addressBlurb + fullAddress;
 
       addMarker(url, true, true);
       getWikiValues();
-  }
-  else {
-    document.getElementById("returned-address").innerHTML = "Address not found.";
-    document.getElementById("returned-address").style.color = "red";
-  }
-
+    } else {
+      document.getElementById("returned-address").innerHTML =
+        "Address not found.";
+      document.getElementById("returned-address").style.color = "red";
+    }
   });
 }
 
 // so if it's the first marker then pass a value for labelName
 // and the addInfoWindow boolean
-// 
+//
 // markerList is the link and name for the info window
 function addMarker(location, labelName, addInfoWindow, markerList) {
   // adds marker location to the bounds object
@@ -181,7 +174,7 @@ function addMarker(location, labelName, addInfoWindow, markerList) {
   // set current location marker label
   // this is for the first marker only
   if (labelName === true) {
-    var labelValue = 'A';
+    var labelValue = "A";
   }
   // otherwise set the marker label to increment
   else {
@@ -191,32 +184,33 @@ function addMarker(location, labelName, addInfoWindow, markerList) {
   var marker = new google.maps.Marker({
     position: location,
     map: map,
-    label: labelValue,
+    label: labelValue
   });
 
   if (addInfoWindow === true) {
-    contentString = 'You are here.';
+    contentString = "You are here.";
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
     // i want this to timeout eventually i think
-    infowindow.open(map,marker);
+    infowindow.open(map, marker);
 
     // so you can click on it again later
-    marker.addListener('click', function() {
+    marker.addListener("click", function() {
       infowindow.open(map, marker);
     });
 
     // closes the window after 3 seconds
-    setTimeout(function () { infowindow.close(); }, 3000);
-  }
-  else {
+    setTimeout(function() {
+      infowindow.close();
+    }, 3000);
+  } else {
     contentString = markerList;
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
     // event listener to open the above infowindow
-    marker.addListener('click', function() {
+    marker.addListener("click", function() {
       infowindow.open(map, marker);
     });
   }
@@ -227,8 +221,10 @@ function addMarker(location, labelName, addInfoWindow, markerList) {
 // all the points on the map
 function centreMap() {
   // set the first marker position as the centre of the map
-  map.setCenter({lat: markers[0].position.lat(), 
-                  lng: markers[0].position.lng()});
+  map.setCenter({
+    lat: markers[0].position.lat(),
+    lng: markers[0].position.lng()
+  });
 
   // create the bounds object
   var bounds = new google.maps.LatLngBounds();
@@ -248,20 +244,23 @@ function centreMap() {
 
 // Wikipedia API call
 function getWikiValues() {
-  var apiUrl = "https://en.wikipedia.org/w/api.php"
+  var apiUrl = "https://en.wikipedia.org/w/api.php";
 
-  $.ajax({url: apiUrl,
-  dataType: 'jsonp',
-  jsonp: 'callback',
-  data: {action: 'query',
-       list: 'geosearch',
-       // i assume this is in metres? seems so
-       gsradius: 1000,
-       gscoord: url.lat + '|' + url.lng,
-       gslimit: numberOfResults,
-       format: 'json'},
+  $.ajax({
+    url: apiUrl,
+    dataType: "jsonp",
+    jsonp: "callback",
+    data: {
+      action: "query",
+      list: "geosearch",
+      // i assume this is in metres? seems so
+      gsradius: 1000,
+      gscoord: url.lat + "|" + url.lng,
+      gslimit: numberOfResults,
+      format: "json"
+    },
     success: function(response) {
-      var baseURL = "https://en.wikipedia.org/?curid="
+      var baseURL = "https://en.wikipedia.org/?curid=";
 
       document.getElementById("wiki-list").innerHTML = "";
 
@@ -269,39 +268,61 @@ function getWikiValues() {
       // console.log(bounds)
 
       if (response.query.geosearch.length === 0) {
-        document.getElementById("result-header").innerHTML = 
-            "No results found.";
+        document.getElementById("result-header").innerHTML =
+          "No results found.";
+      } else {
+        document.getElementById("result-header").innerHTML =
+          "The following pages for your location were found (clicking on links will open them in a new tab):";
       }
-      else {
-        document.getElementById("result-header").innerHTML = 
-            "The following pages for your location were found (clicking on links will open them in a new tab):";
-      }
-
 
       // iterate over the json object and get various values
-      for ( var i = 0; i < response.query.geosearch.length; i++) {
+      for (var i = 0; i < response.query.geosearch.length; i++) {
         var counter = i + 1;
 
         var linkUrl = baseURL + response.query.geosearch[i].pageid;
 
-        nameList = "<ul>" + counter + ": " + "<a href=" + linkUrl + ' ' + "target=" + "_blank" + ">" + response.query.geosearch[i].title + "</a>" + "</ul>";
+        nameList =
+          "<ul>" +
+          counter +
+          ": " +
+          "<a href=" +
+          linkUrl +
+          " " +
+          "target=" +
+          "_blank" +
+          ">" +
+          response.query.geosearch[i].title +
+          "</a>" +
+          "</ul>";
         document.getElementById("wiki-list").innerHTML += nameList;
 
-        var location = new google.maps.LatLng({lat: response.query.geosearch[i].lat,
-                        lng: response.query.geosearch[i].lon});
+        var location = new google.maps.LatLng({
+          lat: response.query.geosearch[i].lat,
+          lng: response.query.geosearch[i].lon
+        });
 
         var labelValue = String(i + 1);
 
-        var markerPostision = {lat: response.query.geosearch[i].lat,
-                        lng: response.query.geosearch[i].lon}
+        var markerPostision = {
+          lat: response.query.geosearch[i].lat,
+          lng: response.query.geosearch[i].lon
+        };
 
-        var markerList = "<a href=" + linkUrl + " " + "target=" + "_blank" + ">" + response.query.geosearch[i].title + "</a>";
+        var markerList =
+          "<a href=" +
+          linkUrl +
+          " " +
+          "target=" +
+          "_blank" +
+          ">" +
+          response.query.geosearch[i].title +
+          "</a>";
 
         // function addMarker(location, labelName, addInfoWindow, infoWindowLink)
         addMarker(markerPostision, false, false, markerList);
-        }
-        centreMap();
       }
+      centreMap();
+    }
   });
 }
 
@@ -340,7 +361,6 @@ function walkingCircle() {
 
 // adds circles to the map of the given radius
 function addCircle(value, colour) {
-
   document.getElementById("walking-key").style.visibility = "visible";
 
   circle = new google.maps.Circle({
