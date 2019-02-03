@@ -1,75 +1,75 @@
 /* this mostly doesn't work for some reason? */
 body {
-    /* background: #3333; */
+  /* background: #3333; */
 }
 
 #map {
-    /* position: sticky; */
-    width: 90%;
-    height: 40em;
-    margin: auto;
-    border-radius: 10px;
-    border: 3px solid white;
+  /* position: sticky; */
+  width: 90%;
+  height: 40em;
+  margin: auto;
+  border-radius: 10px;
+  border: 3px solid white;
 }
 
 @media (max-width: 1199px) {
-    #map {
-        width: 98%;
-    }
+  #map {
+    width: 98%;
+  }
 }
 
 #unordered-list {
-    margin: auto;
-    padding-left: auto;
-    padding-right: 127px;
+  margin: auto;
+  padding-left: auto;
+  padding-right: 127px;
 }
 
 /* padding around wikipedia results */
 /* ul used to avoid bullet points */
 ul {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
 #floating-panel {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #returned-address {
-    height: 4em;
-    margin: auto;
-    margin-bottom: 2px;
+  height: 4em;
+  margin: auto;
+  margin-bottom: 2px;
 }
 
 .col-centered {
-    float: none;
-    margin: auto;
+  float: none;
+  margin: auto;
 }
 
 /* Walking distance elements */
 #walking-key {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #walking-Circle {
-    padding-top: 500em;
+  padding-top: 500em;
 }
 
 #one-hundred-fifty-metres {
-    color: white;
-    background: green;
+  color: white;
+  background: green;
 }
 
 #three-hundred-metres {
-    color: white;
-    background: blue;
+  color: white;
+  background: blue;
 }
 
 #six-hundred-metres {
-    color: white;
-    background: purple;
+  color: white;
+  background: purple;
 }
 
 #search-limit {
-    color: white;
-    background: black;
+  color: white;
+  background: black;
 }

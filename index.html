@@ -1,119 +1,156 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Wikki-goo</title>
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta charset="utf-8" />
 
-<head>
-  <title>Wikki-goo</title>
-  <meta name="viewport" content="initial-scale=1.0">
-  <meta charset="utf-8">
+    <!-- my CSS file -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
-  <!-- my CSS file -->
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
 
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+    <link
+      href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js">
-  </script>
+    <!-- my script file -->
+    <script type="text/javascript" src="script.js"></script>
 
-  <!-- my script file -->
-  <script type="text/javascript" src="script.js"></script>
-
-  <!-- google maps API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUv_e932BMP0LDDqa5RKZj0x8FM2O6-4
+    <!-- google maps API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZUv_e932BMP0LDDqa5RKZj0x8FM2O6-4
 &callback=initMap"
-    async defer></script>
-</head>
+      async
+      defer
+    ></script>
+  </head>
 
-<body>
-  <!-- bootstrap container -->
-  <div class="container-fluid">
-
-    <!-- title and description -->
-    <div class="row">
-      <div class="col-sx-12 col-lg-10">
-        <h1 class="text-center">Wiki-goo</h1>
-        <br>
-        <p id="description" class="text-left">Wiki-goo is a mash up of the wikipdia and google maps APIs. Given an
-          address it returns a marker for that address and wikipedia articles related to that area so you can discover
-          interesting things connected to that area.
-        </p>
-      </div>
-    </div>
-
-    <!-- search input and centre button -->
-    <div class="row">
-      <!-- first column of this row -->
-      <div id="floating-panel" class="col-xs-6 text-center">
-        <div class="input-group">
-          <span class="input-group-btn">
-            <button id="submit" class="btn btn-success" type="button">Go!</button>
-          </span>
-          <input id="address" type="text" class="form-control" placeholder="" value="Tallinn">
+  <body>
+    <!-- bootstrap container -->
+    <div class="container-fluid">
+      <!-- title and description -->
+      <div class="row">
+        <div class="col-sx-12 col-lg-10">
+          <h1 class="text-center">Wiki-goo</h1>
+          <br />
+          <p id="description" class="text-left">
+            Wiki-goo is a mash up of the wikipdia and google maps APIs. Given an
+            address it returns a marker for that address and wikipedia articles
+            related to that area so you can discover interesting things
+            connected to that area.
+          </p>
         </div>
       </div>
 
-      <!-- centre button -->
-      <div class="col-xs-6 text-center">
-        <input onclick="centreMap();" class="btn btn-primary btn-block" type=button value="Centre map">
+      <!-- search input and centre button -->
+      <div class="row">
+        <!-- first column of this row -->
+        <div id="floating-panel" class="col-xs-6 text-center">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button id="submit" class="btn btn-success" type="button">
+                Go!
+              </button>
+            </span>
+            <input
+              id="address"
+              type="text"
+              class="form-control"
+              placeholder=""
+              value="Tallinn"
+            />
+          </div>
+        </div>
+
+        <!-- centre button -->
+        <div class="col-xs-6 text-center">
+          <input
+            onclick="centreMap();"
+            class="btn btn-primary btn-block"
+            type="button"
+            value="Centre map"
+          />
+        </div>
+
+        <!-- walking distance -->
+        <div class="col-xs-12 text-center">
+          Markers
+          <input checked data-toggle="toggle" type="checkbox" id="markers" />
+          Walking distance
+          <input
+            checked
+            data-toggle="toggle"
+            type="checkbox"
+            id="walking-Circle"
+          />
+          Click search
+          <input
+            checked
+            data-toggle="toggle"
+            type="checkbox"
+            id="click-search"
+          />
+        </div>
       </div>
 
-      <!-- walking distance -->
-      <div class="col-xs-12 text-center">
-        Markers <input checked data-toggle="toggle" type="checkbox" id="markers">
-        Walking distance <input checked data-toggle="toggle" type="checkbox" id="walking-Circle">
-        Click search <input checked data-toggle="toggle" type="checkbox" id="click-search">
-      </div>
-    </div>
-
-    <!-- information area, the map address and key for the walking distance estimations -->
-    <div class="row">
-      <div class="col-xs-6 text-center" id="returned-address">
-        <p>The google goecache service has returned the address: </p>
-      </div>
-      <!-- so i want to make this a very small colour coded table -->
-      <div class="col-xs-6 text-center" id="walking-key">
-        <table class="table">
-          <tr>
-            <td id="one-hundred-fifty-metres">2.5 minutes</td>
-            <td id="three-hundred-metres">5 minutes</td>
-          </tr>
-          <tr>
-            <td id="six-hundred-metres">10 minutes</td>
-            <td id="search-limit">20 minutes</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <!-- map area -->
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-        <div id="map"></div>
+      <!-- information area, the map address and key for the walking distance estimations -->
+      <div class="row">
+        <div class="col-xs-6 text-center" id="returned-address">
+          <p>The google goecache service has returned the address:</p>
+        </div>
+        <!-- so i want to make this a very small colour coded table -->
+        <div class="col-xs-6 text-center" id="walking-key">
+          <table class="table">
+            <tr>
+              <td id="one-hundred-fifty-metres">2.5 minutes</td>
+              <td id="three-hundred-metres">5 minutes</td>
+            </tr>
+            <tr>
+              <td id="six-hundred-metres">10 minutes</td>
+              <td id="search-limit">20 minutes</td>
+            </tr>
+          </table>
+        </div>
       </div>
 
-      <!-- col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-6 col-md-4 col-lg-2 -->
-      <!-- ok here is something that's working, 
+      <div class="row">
+        <!-- map area -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+          <div id="map"></div>
+        </div>
+
+        <!-- col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-6 col-md-4 col-lg-2 -->
+        <!-- ok here is something that's working, 
         you offset when needed then cancel that offset at the next break point -->
 
-      <!-- results area -->
-      <div class="col-xs-12 col-xs-push-1 col-sm-9 col-sm-push-2 col-md-9 col-md-push-2 col-lg-4 col-lg-push-0 text-left"
-        id="unordered-list">
-        <div id="result-header">
-          <p>Results will be disaplyed here.</p>
+        <!-- results area -->
+        <div
+          class="col-xs-12 col-xs-push-1 col-sm-9 col-sm-push-2 col-md-9 col-md-push-2 col-lg-4 col-lg-push-0 text-left"
+          id="unordered-list"
+        >
+          <div id="result-header">
+            <p>Results will be disaplyed here.</p>
+          </div>
+
+          <ul id="wiki-list" class="list-group-item"></ul>
         </div>
-
-        <ul id='wiki-list' class="list-group-item"></ul>
       </div>
-
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

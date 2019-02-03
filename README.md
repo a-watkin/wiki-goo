@@ -18,4 +18,4 @@ A distance from the chosen search location can also be overlaid on the map, this
 
 Click search, toggling click search allows for clicking on any part of the map and setting that as the new location. Information about that location can then be found even if the address is not known. The local area can be explored in this way.
 
-[You can see a live version of the project here](http://adevwatkin.com/wiki-goo/)
+[You can see a live version of the project here](https://a-watkin.github.io/old-project-page/wiki-goo/index.html)
